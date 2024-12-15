@@ -1,0 +1,22 @@
+
+strlen.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <main>:
+   0:	f3 0f 1e fa          	endbr64 
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	48 83 ec 10          	sub    $0x10,%rsp
+   c:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%rbp)
+  13:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 1a <main+0x1a>
+  1a:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  1e:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  22:	48 89 c7             	mov    %rax,%rdi
+  25:	e8 00 00 00 00       	call   2a <main+0x2a>
+  2a:	89 45 f4             	mov    %eax,-0xc(%rbp)
+  2d:	b8 00 00 00 00       	mov    $0x0,%eax
+  32:	c9                   	leave  
+  33:	c3                   	ret    
+
