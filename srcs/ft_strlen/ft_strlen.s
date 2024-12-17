@@ -9,6 +9,6 @@ loop:
 	inc	rcx
 	cmp	al, 0
 	jne loop
-	dec rcx
+	dec rcx ; do not count NULL 
 	mov rax, rcx
 	ret 

@@ -6,15 +6,13 @@ loop:
     mov al, BYTE [rdi + rcx]
     cmp al, BYTE [rsi + rcx]
     jne end_loop
-    cmp al, 0; both is null
+    cmp al, 0 ; both is null
     je end_loop
-    inc rcx
+    inc rcx ; both is same. but not null
     jmp loop
 end_loop:
     xor rax, rax
     mov al, BYTE [rdi + rcx]
     sub al, BYTE [rsi + rcx]
     movsx rax, al
-min:
-    
     ret
