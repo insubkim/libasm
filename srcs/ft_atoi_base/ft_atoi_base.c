@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 static int ft_strlen(const char *s)
 {
     int len;
@@ -12,7 +14,7 @@ static int ft_strlen(const char *s)
 }
 
 
-static int get_idx(const char* arr, char c)
+static int get_idx(const char* arr, const char c)
 {
     int idx;
 
@@ -27,7 +29,7 @@ static int get_idx(const char* arr, char c)
     return -1;
 }
 
-static is_str_unique_chars(char *str)
+int static is_str_unique_chars(const char *str)
 {
     int chars[256] = {0, };
 
@@ -40,7 +42,16 @@ static is_str_unique_chars(char *str)
     return 1;
 }
 
-// 10 진수 까지만 가능
+int static contains(const char *s, const char c)
+{
+    if (s == NULL)
+        return -1;
+    while (*s)
+        if (*s++ == c)
+            return 1;
+    return 0;
+}
+
 int ft_atoi_base(const char* s, const char* base)
 {
     long long   integer;
@@ -57,8 +68,8 @@ int ft_atoi_base(const char* s, const char* base)
     while (*s && (*s == '+' || *s =='-'))
         if (*s++ == '-')
             sign *= -1;
-    while (contains(base, s))
-        integer = integer * base_len + get_idx(base, *s);
+    while (contains(base, *s))
+        integer = integer * base_len + get_idx(base, *s++);
     return integer * sign;
 }
 
@@ -66,7 +77,7 @@ int ft_atoi_base(const char* s, const char* base)
 
 int main()
 {
-    int integer = ft_atoi_base("FF", 16);
+    int integer = ft_atoi_base("FF", "0123456789ABCDEF");
     printf("value :%d\n", integer);
     return 0;
 }
