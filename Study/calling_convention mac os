@@ -1,0 +1,11 @@
+맥이랑 리눅스는 조금 다름. 
+
+함수 호출시 c 소스 에서 _ 가 추가됨. 
+https://stackoverflow.com/questions/34192828/how-to-solve-this-linker-error-i-get-when-trying-to-link-c-with-assembly
+
+mac 은 시스템 콜을 부를때 0x200000000 을 더해야함. 
+https://dustin.schultz.io/mac-os-x-64-bit-assembly-system-calls.html
+https://github.com/rewired-gh/macos-system-call-table/blob/main/arm64-system-calls.md
+
+sys/syscall.h 에 시스템 콜 테이블 정보 
+mach/syscall_sw.h << 아직 확인 안됨.

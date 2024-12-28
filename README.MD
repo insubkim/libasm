@@ -1,4 +1,6 @@
 NASM 사용법
-nasm -felf64 [filename];
+linux : nasm -felf64 [filename];
+mac : nasm -macho64 [filename];
+
 ld [filename.o];
 ./a.out 
