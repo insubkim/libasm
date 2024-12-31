@@ -13,8 +13,6 @@ int main()
 
   {
     ft_dup = ft_strdup(s);
-    if (!ft_dup)
-      printf("ft_strdup :NULL\n");
     printf("ft_strdup :%s\n", ft_dup);
     free(ft_dup);
   
