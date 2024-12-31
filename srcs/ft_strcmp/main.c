@@ -3,10 +3,10 @@
 
 int main()
 {
-    extern int _ft_strcmp(char *s1, char *s2);
+    extern int ft_strcmp(char *s1, char *s2);
 
     {
-        int diff = _ft_strcmp("A", "a");
+        int diff = ft_strcmp("A", "a");
         printf("ft_strlen A - a is :%d\n", diff);
         
         int diff2 = strcmp("A", "a");
@@ -14,7 +14,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("a", "A");
+        int diff = ft_strcmp("a", "A");
         printf("ft_strlen a - A is :%d\n", diff);
         
         int diff2 = strcmp("a", "A");
@@ -22,7 +22,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("a", "a");
+        int diff = ft_strcmp("a", "a");
         printf("ft_strlen a - a is :%d\n", diff);
         
         int diff2 = strcmp("a", "a");
@@ -30,7 +30,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("a", "aA");
+        int diff = ft_strcmp("a", "aA");
         printf("ft_strlen a - aA is :%d\n", diff);
         
         int diff2 = strcmp("a", "aA");
@@ -38,7 +38,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("aA", "a");
+        int diff = ft_strcmp("aA", "a");
         printf("ft_strlen aA - a is :%d\n", diff);
         
         int diff2 = strcmp("aA", "a");
@@ -46,7 +46,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("", "a");
+        int diff = ft_strcmp("", "a");
         printf("ft_strlen '' - a is :%d\n", diff);
         
         int diff2 = strcmp("", "a");
@@ -54,7 +54,7 @@ int main()
     }
 
     {
-        int diff = _ft_strcmp("a", "");
+        int diff = ft_strcmp("a", "");
         printf("ft_strlen a - '' is :%d\n", diff);
         
         int diff2 = strcmp("a", "");

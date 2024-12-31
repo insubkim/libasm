@@ -6,9 +6,11 @@ global _ft_strdup
 _ft_strdup:
     ;push rdi
     ;call _ft_strlen
-    mov rdi, 20
-    call _malloc
-    ret
+    mov rdi, 1024
+    sub rsp, 16 
+	call _malloc
+	add rsp, 16
+	ret
     ;pop rdi
     ;mov rsi, rax
     ;call _ft_strcpy
