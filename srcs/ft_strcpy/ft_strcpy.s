@@ -4,9 +4,9 @@ _ft_strcpy:
     xor rcx, rcx
 loop:
     mov al, [rsi + rcx]
-    mov [rdi], al
+    mov [rdi + rcx], al
     inc rcx
     cmp al, 0
     jne loop
-    mov rax, rsi
+    mov rax, rdi
     ret
