@@ -1,5 +1,5 @@
 extern _ft_strlen
-extern _malloc
+extern malloc
 extern _ft_strcpy
 section .text
 global _ft_strdup
@@ -8,7 +8,7 @@ _ft_strdup:
     call _ft_strlen
     mov rdi, rax
 	sub rsp, 8
-    call _malloc
+    call malloc wrt ..plt
     add rsp, 8
     mov rsi, r12
     mov rdi, rax

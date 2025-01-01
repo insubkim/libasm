@@ -1,11 +1,9 @@
 section .text
 global _ft_strlen
 _ft_strlen:
-	mov rsi, rdi
-	xor rax, rax
 	xor rcx, rcx
 loop:
-	mov al, BYTE [rsi + rcx]
+	mov al, BYTE [rdi + rcx]
 	inc	rcx
 	cmp	al, 0
 	jne loop

@@ -4,16 +4,17 @@
 
 int main()
 {
-  const char *s = "Hello World!";
 
   char *ft_dup = 0;
   char *dup = 0;
 
-  extern char* ft_strdup(const char *s);
+  extern char* _ft_strdup(const char *s);
 
   {
-    ft_dup = ft_strdup(s);
-    printf("ft_strdup :%s\n", ft_dup);
+    const char *s = "Hello World!";
+    
+    ft_dup = _ft_strdup(s);
+    printf("_ft_strdup :%s\n", ft_dup);
     free(ft_dup);
   
     dup = strdup(s);
@@ -21,6 +22,21 @@ int main()
     free(dup);
   }
 
+{
+    char s[1024 * 1024] = {0, };
+    for (int i = 0; i < 1024 * 1024 - 1; i++)
+      s[i] = '*';
+    
+    ft_dup = _ft_strdup(s);
+    printf("_ft_strdup :%s\n", ft_dup);
+  
+    dup = strdup(stdlib);
+    printf("strdup :%s\n", dup);
+    
+    printf("is same = %d\n", strcmp(ft_dup, dup));
 
+    free(ft_dup);
+    free(dup);
+  }
   return 0;
 }
