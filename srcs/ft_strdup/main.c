@@ -30,7 +30,7 @@ int main()
     ft_dup = _ft_strdup(s);
     printf("_ft_strdup :%s\n", ft_dup);
   
-    dup = strdup(stdlib);
+    dup = strdup(s);
     printf("strdup :%s\n", dup);
     
     printf("is same = %d\n", strcmp(ft_dup, dup));
