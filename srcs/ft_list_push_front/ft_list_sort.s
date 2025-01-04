@@ -16,23 +16,25 @@ bubble_sort:
     mov rcx, [rdi]
 outer_loop:
     cmp [rcx + 8], 0 ; check if next is null
-    jle not_sorted ; if next is present it is not sorted
+    jle not_sorted ; if next is present it can be sorted
     ret
 not_sorted:
     mov rbx, [rcx + 8] ; save list next pointer
 inner_loop:
     cmp rbx, 0 ; check if list is null
-    jle compare_val ; if not null than compare 
+    jle compare ; if not null than compare 
     mov rcx, [rcx + 8] ; mov rcx to next node 
     jump outer_loop
-compare_val:
+compare:
     push rdx
     push rbx ; save registers
     push rcx
     push rdi
     push rsi
     push rsp
-    and rsp, -16
+    and rsp, -16 ; align stack
+    mov rdi, rcx
+    mov rsi, rbx
     call [rsi] ; call cmp 
     pop rsp
     pop rsi
@@ -43,7 +45,7 @@ compare_val:
     pop rdx
     cmp rax, 0 ; check if first arg is bigger
     jle dont_change_val
-    ; chage value
+    xchg rcx, rbx; chage value
 dont_change_val:
     mov rbx, [rbx + 8] ;  mov node to next
     jump inner_loop

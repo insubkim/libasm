@@ -31,8 +31,21 @@ int main(void)
     int list_size = _ft_list_size(head); 
     printf("list size :%d\n", list_size);
 
-    extern void _ft_list_sort(&head, strcmp);
+    //extern void _ft_list_sort(&head, strcmp);
 
+    extern void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+
+    char *data_ref = "freeable";
+    char *data = malloc(sizeof(char) * (strlen(data_ref) + 1));
+
+    _ft_list_push_front(&head, data);
+
+    printf("before remove\n");
+    iter(head);
+
+    _ft_list_remove_if(&head, data_ref, strcmp, free);
+
+    printf("after remove\n");
     iter(head);
 
     return 0;
