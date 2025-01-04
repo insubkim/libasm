@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int main()
 {
@@ -14,10 +15,12 @@ int main()
     const char *s = "Hello World!";
     
     ft_dup = _ft_strdup(s);
+    printf("errno :%d\n", errno);
     printf("_ft_strdup :%s\n", ft_dup);
     free(ft_dup);
   
     dup = strdup(s);
+    printf("errno :%d\n", errno);
     printf("strdup :%s\n", dup);
     free(dup);
   }
@@ -28,10 +31,12 @@ int main()
       s[i] = '*';
     
     ft_dup = _ft_strdup(s);
-    printf("_ft_strdup :%s\n", ft_dup);
+    printf("errno :%d\n", errno);
+    //printf("_ft_strdup :%s\n", ft_dup);
   
     dup = strdup(s);
-    printf("strdup :%s\n", dup);
+    printf("errno :%d\n", errno);
+    //printf("strdup :%s\n", dup);
     
     printf("is same = %d\n", strcmp(ft_dup, dup));
 
