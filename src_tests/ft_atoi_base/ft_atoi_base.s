@@ -58,19 +58,30 @@ return_error:
 
 str_is_unique:
     ;check string is unique. return rax 1 if true
+    push rbx
+    push rdx
     xor rax, rax
+    lea rbx, [asciiArray]
 loop:
     mov al, BYTE [rdi]
     add rdi, 1
-    cmp 1, asciiArray + al
+    mov rdx, rbx
+    add rdx, rax
+    mov rax, [rdx]
+    cmp rax, 1
     je dup_char
-    mov asciiArray + al, 1
+    mov rax, 1
+    mov [rdx], rax
     cmp al, 0
     jne loop
-    mov rax, 1 
+    mov rax, 1
+    pop rdx
+    pop rbx
     ret
 dup_char:
     mov rax, 0
+    pop rdx
+    pop rbx
     ret
 
 contains:
