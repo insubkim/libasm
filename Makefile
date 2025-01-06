@@ -33,8 +33,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.s
 
 $(NAME): $(OBJS)
 	@ar -rcs $@ $^
-	@echo  "$(COLOUR_BLUE)LIBRARY CREATE COMPLETE [$(NAME
-	)]$(COLOUR_END)"
+	@echo  "$(COLOUR_BLUE)LIBRARY CREATE COMPLETE [$(NAME)]$(COLOUR_END)"
 
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)
