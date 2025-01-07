@@ -3,15 +3,8 @@
 
 int main()
 {
-    extern size_t _ft_strlen(char *str);
+    extern int _ft_atoi_base(const char* str, const char* base);
 
-    char *str = "HELLO ASSEMBLY";
-    size_t ft_len = _ft_strlen(str);
-    size_t len = strlen(str);
-
-    printf("return ft_len :%ld\n", ft_len);
-    printf("return len :%ld\n", len);
-
-
+    printf("val : %d\n", _ft_atoi_base("FF", "0123456789ABCDEF"));
     return 0;
 }

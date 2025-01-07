@@ -1,8 +1,8 @@
 extern _ft_strlen
 
 section .text
-global ft_atoi_base
-ft_atoi_base:
+global _ft_atoi_base
+_ft_atoi_base:
     mov rdx, 0 ; return val
     mov rbx, 1 ; stores sign value 
     mov rcx, 0 ; stores base_len
@@ -20,10 +20,10 @@ ft_atoi_base:
     cmp rax, 2 
     jl return_error
     mov rcx, rax
-    ; check if base has unique chars
+    ; ; check if base has unique chars
     push rdi
     mov rdi, rsi
-    jmp str_is_unique
+    call str_is_unique
     pop rdi
     cmp rax, 0
     je return_error
@@ -36,21 +36,41 @@ ignore_space:
     je ignore_space
     cmp al, 0 ; check str end
     je return_error
+    sub rdi, 1
 ;get sign chars
 convert_sign:
     mov al, BYTE [rdi]
     add rdi, 1
-    cmp al, 43 ; 43 is '+' in ascii
-    je ignore_space
-    cmp al, 45 ; 45 is '-' in ascii
-    je ignore_space
     cmp al, 0 ; check str end
     je return_error
-;for loop  
+    cmp al, 43 ; 43 is '+' in ascii
+    je convert_sign
+    xor rbx, rbx ; change sign
+    cmp al, 45 ; 45 is '-' in ascii
+    je convert_sign
+    xor rbx, rbx ; change sign
+    sub rdi, 1
+;for loop
+    xor rax, rax
+    xor rdx, rdx
+cal:
     ;check str is base char
     ;calculate char
+    imul rdx, rcx
+    push rdx
+    push rsi
+    call get_idx
+    pop rsi
+    pop rdx
+    add rdx, rax
+    xor rax, rax
+    add rdi, 1
+    mov al, byte[rdi]
+    cmp rax, 0
+    jne cal
 ;return value and sign extend
-    imul rdx, rbx
+    ; imul rdx, rbx
+    mov rax, rdx
     ret
 return_error:
     mov rax, 0
@@ -60,20 +80,22 @@ str_is_unique:
     ;check string is unique. return rax 1 if true
     push rbx
     push rdx
-    xor rax, rax
-    lea rbx, [asciiArray]
+    lea rbx, [rel asciiArray]
 loop:
+    xor rax, rax
     mov al, BYTE [rdi]
     add rdi, 1
+    cmp al, 0
+    je end_loop
     mov rdx, rbx
     add rdx, rax
-    mov rax, [rdx]
-    cmp rax, 1
+    mov al, BYTE [rdx]
+    cmp al, 1
     je dup_char
     mov rax, 1
     mov [rdx], rax
-    cmp al, 0
-    jne loop
+    jmp loop
+end_loop:
     mov rax, 1
     pop rdx
     pop rbx
@@ -86,6 +108,20 @@ dup_char:
 
 contains:
     ;check base has str
+    ret
+
+get_idx:
+    mov al, byte [rdi]
+    mov dl, 0
+find_idx:
+    mov ah, byte [rsi]
+    add rsi, 1
+    add dl, 1
+    cmp ah, al
+    jne find_idx
+    sub dl, 1
+    xor rax, rax
+    mov al, dl
     ret
 
 section .data
