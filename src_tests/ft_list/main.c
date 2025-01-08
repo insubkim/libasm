@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef struct s_list
 {
@@ -17,7 +18,7 @@ void    iter(t_list *head)
 
 int main(void)
 {
-    t_list  list = {0, };
+    t_list  list = {"data0", NULL};
     t_list* head = &list;
 
     extern void _ft_list_push_front(t_list **begin_list, void *data);
@@ -31,10 +32,14 @@ int main(void)
     int list_size = _ft_list_size(head); 
     printf("list size :%d\n", list_size);
 
-    extern void ft_list_sort(t_list **begin_list, int (*cmp)());
+    extern void _ft_list_sort(t_list **begin_list, int (*cmp)());
     
+    printf("Before Sort\n");
+    iter(head);
+
     _ft_list_sort(&head, strcmp);
 
+    printf("After Sort\n");
     iter(head);
 
     // extern void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
