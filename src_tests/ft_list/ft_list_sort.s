@@ -8,14 +8,21 @@ _ft_list_sort:
     ;make loop2
     ;cmp
     ;change value if bigger
+
+    ; check parameter
     cmp rdi, 0
+    jne bubble_sort
+    cmp rsi, 0
     jne bubble_sort
     ret
 bubble_sort:
     mov rdx, rdi ; save head address
     mov rcx, [rdi]
+    mov r8, 0 ; save outer loop prev node
+    mov r9, 0 ; save inner loop prev node
 outer_loop:
     cmp [rcx + 8], 0 ; check if next is null
+    mov r8, rcx ; save prev node
     jle not_sorted ; if next is present it can be sorted
     ret
 not_sorted:
