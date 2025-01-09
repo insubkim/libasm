@@ -6,6 +6,7 @@ _ft_list_sort:
     jne bubble_sort
     cmp rsi, 0
     jne bubble_sort
+    mov r12, rsi
     ret
 bubble_sort:
     mov r8, 0 ; save outer loop prev node
@@ -35,12 +36,15 @@ compare:
     push r9
     push r10
     push r11
+    push r12
     push rsp
-    and rsp, -16 ; align stack
+    sub rsp, 8
     mov rdi, rcx
     mov rsi, rbx
-    call [rsi] ; call cmp 
+    call r12 ; call cmp
+    pop rbp 
     pop rsp
+    pop r12
     pop r11
     pop r10
     pop r9

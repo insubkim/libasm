@@ -12,6 +12,13 @@ gdb asm step in : si
 gdb asm next : ni
 gdb dashboard 확인 : dashboard -layout source assembly registers stack
 
+메모리 확인 
+x/nfu addr
+n : count
+f : format 'x', 'd', 'u', 'o', 't', 'a', 'c', 'f', 's'
+u : 사이즈 (b 바이트, h 하프바이트, w 워드, g 더블워드)
+예시.
+x/100b address : 100 바이트 hex 값으로 출력
 
 make all : 라이브러리 생성
 make clean : 오브젝트 삭제
