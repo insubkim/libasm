@@ -36,14 +36,12 @@ compare:
     push r9
     push r10
     push r11
-    push r12
     push rsp
-    sub rsp, 8
+    and rsp, -16
     mov rdi, rcx
     mov rsi, rbx
     call r12 		; call cmp
     pop rsp
-    pop r12
     pop r11
     pop r10
     pop r9

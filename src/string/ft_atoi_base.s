@@ -28,7 +28,7 @@ _ft_atoi_base:
     cmp rax, 0
     je return_error
     ;ignore spaces
-    MOV rax, 0
+    mov rax, 0
 ignore_space:
     mov al, BYTE [rdi]
     add rdi, 1
