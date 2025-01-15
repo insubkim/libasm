@@ -56,9 +56,15 @@ compare:
     mov rax, [rcx + 8] 	; save outer next  
     mov r11, [rbx + 8] 	; save inner next
     
-    mov [rbx + 8], rax 	; change inner next to outer next
     mov [rcx + 8], r11 	; change outer next to inner next
-  
+    cmp rax, rbx
+    je j2
+j1: 
+    mov [rbx + 8], rax 	; change inner next to outer next\
+    jmp j3
+j2:
+    mov [rbx + 8], rcx
+j3:
     cmp r8, 0
     je change_root 
     mov [r8 + 8], rbx
