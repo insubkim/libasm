@@ -51,7 +51,7 @@ compare:
     pop rcx
     pop rbx
     cmp rax, 0 		; check if first arg is bigger
-    jne dont_change_val
+    jle dont_change_val
     ;change value
     mov rax, [rcx + 8] 	; save outer next  
     mov r11, [rbx + 8] 	; save inner next

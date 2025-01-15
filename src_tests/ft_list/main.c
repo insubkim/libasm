@@ -24,8 +24,8 @@ int main(void)
     extern void _ft_list_push_front(t_list **begin_list, void *data);
 
     _ft_list_push_front(&head, "data1");
-    _ft_list_push_front(&head, "data2");
-    _ft_list_push_front(&head, "data3");
+    //_ft_list_push_front(&head, "data2");
+    //_ft_list_push_front(&head, "data3");
 
     extern int _ft_list_size(t_list *head);
 
