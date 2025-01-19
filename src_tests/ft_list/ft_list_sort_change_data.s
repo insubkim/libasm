@@ -24,16 +24,12 @@ inner_loop:
 compare:
     push rbx 		; save registers
     push rcx
-    push rdi
-    push rsi
     push rsp
     and rsp, -16
     mov rdi, [rcx]
     mov rsi, [rbx]
     call r12 		; call cmp
     pop rsp
-    pop rsi
-    pop rdi
     pop rcx
     pop rbx
     cmp eax, 0 		; check if first arg is bigger
