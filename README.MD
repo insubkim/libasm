@@ -25,3 +25,4 @@ x/4s address : print 4 string each line
 make all : 라이브러리 생성
 make clean : 오브젝트 삭제
 make fclean : 라이브러리, 오브젝트 삭제
+

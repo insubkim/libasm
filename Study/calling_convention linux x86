@@ -12,3 +12,10 @@ c lib 를 호출할때 relocation 문제가 생김.
 call _malloc wrt ..plt 로 해결 가능. 
 https://www.nasm.us/xdoc/2.11.08/html/nasmdoc7.html#section-7.9.3
 Referring to a procedure name using wrt ..plt causes the linker to build a procedure linkage table entry for the symbol, and the reference gives the address of the PLT entry. You can only use this in contexts which would generate a PC-relative relocation normally (i.e. as the destination for CALL or JMP), since ELF contains no relocation type to refer to PLT entries absolutely.
+
+
+64비트 리눅스(System V AMD64 ABI) 기준으로,
+
+caller-saved 레지스터(RDI, RSI, RDX, RCX, R8, R9, R10, R11)는 호출 직후 원래 값을 유지할 필요가 있으면 호출자가 직접 push/pop 등으로 보존해야 하고,
+-> 컴파일러등 자주 쓰이는 레지스터들 + 32 비트에서 EAX, ECX, EDX 에서 확장된거임. 여기 64 비트에서 6개 까지 추가됨.
+callee-saved 레지스터(RBX, RBP, R12, R13, R14, R15)는 호출된 함수가 함부로 건드리면 안 되며(만약 사용한다면 함수가 push/pop으로 복원해야 함)
