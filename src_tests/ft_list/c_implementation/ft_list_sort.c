@@ -1,6 +1,6 @@
 void ft_list_sort(t_list** head, void (*cmp)())
 {
-	if (!head || !*head || cmp)
+	if (!head || !*head || !cmp)
 		return ;
 	t_list	*start = *head;
 	t_list	*n = *head;
@@ -11,7 +11,7 @@ void ft_list_sort(t_list** head, void (*cmp)())
 		t_list	*p_prev = n;
 		while (p)
 		{
-			if (cmp(n -> data, p -> data < 0)
+			if (cmp(n -> data, p -> data < 0) > 0)
 			{
 				// change n, p
 				// 1. a -> n -> b -> p 
@@ -52,7 +52,7 @@ void ft_list_sort(t_list** head, void (*cmp)())
 
 				tmp = n_prev;
 				n_prev = p_prev;
-				p_prev = n_prev;
+				p_prev = tmp;
 			}
 			p_prev = p;
 			p = p -> next;
