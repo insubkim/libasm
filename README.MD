@@ -1,3 +1,5 @@
+intel x86/64, NASM syntax, mac os 기준으로 작성
+
 NASM 사용법
 linux : nasm -felf64 [filename];
 mac : nasm -macho64 [filename];
