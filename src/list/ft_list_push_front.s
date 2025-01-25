@@ -1,4 +1,4 @@
-extern malloc
+extern _malloc
 section .text
 global _ft_list_push_front
 _ft_list_push_front:
@@ -14,7 +14,7 @@ make_node:
     mov rdi, 16
     push rsp 
     and rsp, -16
-    call malloc wrt ..plt
+    call _malloc
     pop rsp
     cmp rax, 0
     jne change_head
