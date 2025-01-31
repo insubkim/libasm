@@ -1,71 +1,88 @@
+struc	locals
+	.cur_node		resw 1
+	.prev_node	resw 1
+	.head_ptr		resw 1
+	.data_ref		resw 1
+	.cmp_ptr		resw 1
+	.free_ptr		resw 1
+endstruc
+
+%define LOCAL_SIZE 48
+
 section .text
 global _ft_list_remove_if
 _ft_list_remove_if:
+	; save stack registers
+	push rbp
+	mov rbp, rsp
+	; set local vars
+	sub rsp, LOCAL_SIZE
+	mov [rsp - locals.head_ptr], rdi
+	mov [rsp - locals.data_ref], rsi
+	mov [rsp - locals.cmp_ptr], rdx
+	mov [rsp - locals.free_ptr], rcx
 	;rdi for head, rsi for data_ref, rdx for cmp, rcx for free
 	;check null
-    cmp rdi, 0
-    je return
-    cmp rsi, 0
-    je return
-    cmp rdx, 0
-    je return
-    cmp rcx, 0
-    je return
-	mov r8, [rdi] ; store cur node
-	mov r9, 0 ; store prev node
+	cmp QWORD [rsp - locals.head_ptr], 0
+	je return
+	cmp QWORD [rsp - locals.data_ref], 0
+	je return
+	cmp QWORD [rsp - locals.cmp_ptr], 0
+	je return
+	cmp QWORD [rsp - locals.free_ptr], 0
+	je return
+	mov rax, [rsp - locals.head_ptr]
+	mov rax, [rax]
+	mov QWORD [rsp - locals.cur_node], rax ; store cur node
+	mov QWORD [rsp - locals.prev_node], 0 ; store prev node
 loop:
-	cmp r8, 0
+	cmp QWORD [rsp - locals.cur_node], 0
 	je return
 	; compare val
-	push r8
-	push r9
-	push rdi
-	push rsi
-	push rdx
-	push rcx
 	push rsp
 	and rsp, -16
-	mov rdi, [r8]
-	call rdx
+	mov rax, QWORD [rsp - locals.cur_node]
+	mov rdi, [rax]
+	mov rax, QWORD [rsp - locals.data_ref]
+	mov rsi, rax
+	call QWORD [rsp - locals.cmp_ptr]
 	pop rsp
-	pop rcx
-	pop rdx
-	pop rsi
-	pop rdi
-	pop r9
-	pop r8
 	cmp rax, 0
 	jne dont_delete
-	;delete val
-	push r8
-	push r9
-	push rdi
-	push rsi
-	push rdx
-	push rcx
+	; delete val
 	push rsp
 	and rsp, -16
-	mov rdi, [r8]
-	call rcx
+	mov rax, QWORD [rsp - locals.cur_node]
+	mov rdi, [rax]
+	call QWORD [rsp - locals.free_ptr]
 	pop rsp
-	pop rcx
-	pop rdx
-	pop rsi
-	pop rdi
-	pop r9
-	pop r8
-	;change prev
-	cmp r9, 0
+	; change prev
+	cmp QWORD [rsp - locals.prev_node], 0
 	je change_root
-	mov rax, [r8 + 8]
-	mov [r9 + 8], rax
+	mov rax, QWORD [rsp - locals.cur_node]
+	mov rax, [rax + 8]
+	mov rcx, QWORD [rsp - locals.prev_node]
+	mov [rcx + 8], rax
 	jmp dont_delete
 change_root:
-	mov rax, [r8 + 8]
-	mov [rdi], rax
+	mov rax, QWORD [rsp - locals.cur_node]
+	mov rax, [rax + 8]
+	mov rcx, QWORD [rsp - locals.head_ptr]
+	mov [rcx], rax
 dont_delete:
-	mov r9, r8
-	mov r8, [r8 + 8]
+	; change prev and cur
+	mov rax, QWORD [rsp - locals.cur_node]
+	mov rbx, [rax + 8]
+	mov rcx, QWORD [rsp - locals.prev_node]
+	; check prev null
+	cmp rcx, 0
+	je l
+	mov QWORD [rsp - locals.prev_node], rax 
+l:
+	mov QWORD [rsp - locals.cur_node], rbx 
 	jmp loop
 return:
-    ret
+	; restore stack registers
+	mov rsp, rbp
+	pop rbp
+  ret
