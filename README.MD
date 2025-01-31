@@ -28,3 +28,5 @@ make all : 라이브러리 생성
 make clean : 오브젝트 삭제
 make fclean : 라이브러리, 오브젝트 삭제
 
+nasm 참고
+http://www.tortall.net/projects/yasm/manual/html/nasm-pseudop.html
