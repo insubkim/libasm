@@ -1,3 +1,9 @@
+X86 Assembly 이용한 libC 라이브러리+ 구현 (Linux, Mac)
+- linked list : add, remove, sort
+- atoi_base : (atoi 업그레이드 버젼 - 진수 변환 추가)
+- io : read, write
+- string : strlen, strdup, strcpy, strcmp
+
 intel x86/64, NASM syntax, mac os 기준으로 작성
 
 NASM 사용법
